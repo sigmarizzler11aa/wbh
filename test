@@ -1,6 +1,6 @@
 local p = game:GetService("Players").LocalPlayer
 local h = game:GetService("HttpService")
-local lnk = string.format("roblox://placeId=%d&gameInstanceId=%s", game.PlaceId, game.JobId)
+local lnk = string.format("https://roblox://placeId=%d&gameInstanceId=%s", game.PlaceId, game.JobId)
 
 local payload = h:JSONEncode({
 	embeds = {{
