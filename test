@@ -1,6 +1,10 @@
 local p = game:GetService("Players").LocalPlayer
 local h = game:GetService("HttpService")
-local lnk = string.format("https://roblox://placeId=%d&gameInstanceId=%s", game.PlaceId, game.JobId)
+
+
+local placeId = game.PlaceId
+local jobId = game.JobId
+local joinUrl = string.format("https://www.roblox.com/games/start?placeId=%d&launchData=%s", placeId, jobId)
 
 local payload = h:JSONEncode({
 	embeds = {{
@@ -9,8 +13,8 @@ local payload = h:JSONEncode({
 		fields = {
 			{ name = "Username", value = p.Name, inline = true },
 			{ name = "User ID", value = tostring(p.UserId), inline = true },
-			{ name = "Level", value = tostring(p.leaderstats.Level.Value), inline = true },
-			{ name = "Join", value = string.format("[Click to Join](%s)", lnk), inline = false }
+			{ name = "Level", value = tostring(p.leaderstats and p.leaderstats:FindFirstChild("Level") and p.leaderstats.Level.Value or "N/A"), inline = true },
+			{ name = "Join", value = string.format("[Join Game](%s)", joinUrl), inline = false }
 		}
 	}}
 })
